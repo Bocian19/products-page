@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block page_header %}
+	Product add
+{% endblock %}
+
+{% block top_buttons %}
+	<div class="mt-1">
+		<button onclick="required(event);" type="button">Save</button>
+		<button id="">Cancel</button>
+	</div>
+{% endblock %}
+
+{% block container %}
+	<form action="/add-product" class="row w-50" id="product_form" method="post">
+		<div class="row mb-3">
+			<label for="sku" class="col-sm-2 col-form-label">SKU</label>
+			<div class="col-sm-10">
+				<input type="text" id="sku" name="sku" class="form-control required" required title="This field is required">
+				<span class="text-danger">
+					{% if allert %}
+						{{ allert }}
+					{% endif %}
+				</span>
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label for="name" class="col-sm-2 col-form-label">Name</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control required" id="name" name="name" pattern="[A-Za-z0-9]{3,}" required title="Please enter text with minimum 3 characters">
+				<span class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label for="name" class="col-sm-2 col-form-label">Price</label>
+			<div class="col-sm-10">
+				<input type="number" class="form-control required" id="price" name="price" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0.01" required title="The number input must start with a number and use comma as a decimal character.">
+				<span class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row mb-3">
+			<div>
+				<label for="product_type" class="col-sm-2 col-form-label">Type Switcher</label>
+				<select id="product_type" class="text-center" onchange="myfunction(this.value);" form="product_form" name="product_type">
+					<option selected value="not_selected">Type Switcher</option>
+					<option id="DVD" value="dvd">DVD</option>
+					<option id="Book" value="book">Book</option>
+					<option id="Furniture" value="furniture">Furniture</option>
+				</select>
+			</div>
+			<span id="type-message" class="text-danger"></span>
+		</div>
+		<div class="row mb-3 collapse" id="dvd">
+			<label for="size" class="col-sm-2 col-form-label">Size (MB)</label>
+			<div class="col-sm-10">
+				<input type="number" class="form-control" id="size" name="size" title="This field is required">
+				<span class="text-danger"></span>
+			</div>
+			<div class="text-center">Please provide DVD capacity in MB</div>
+		</div>
+		<div class="collapse row mb-3" id="furniture">
+			<label for="height" class="col-sm-2 col-form-label">Height</label>
+			<div class="col-sm-10">
+				<input type="number" class="form-control" id="height" name="height" title="This field is required">
+				<span class="text-danger"></span>
+			</div>
+			<label for="width" class="col-sm-2 col-form-label">Width</label>
+			<div class="col-sm-10">
+				<input type="number" class="form-control" id="width" name="width" title="This field is required">
+				<span class="text-danger"></span>
+			</div>
+			<label for="length" class="col-sm-2 col-form-label">Length</label>
+			<div class="col-sm-10">
+				<input type="number" class="form-control" id="length" name="length" title="This field is required">
+				<span class="text-danger"></span>
+			</div>
+			<div class="text-center">Please provide dimensions in HxWxLformat</div>
+		</div>
+		<div class="row mb-3 collapse" id="book">
+			<label for="weight" class="col-sm-2 col-form-label">Weight</label>
+			<div class="col-sm-10">
+				<input type="number" class="form-control" id="weight" name="weight" title="This field is required">
+				<span class="text-danger"></span>
+			</div>
+			<div class="text-center">Please provide weight of a book</div>
+		</div>
+	</form>
+	<script src="/js/products-add.js"></script>
+{% endblock %}

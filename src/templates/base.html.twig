@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous"> {% block javascript %}{% endblock %}
+	</head>
+		{% block body %}
+			<body>
+				<div class="content">
+					<div class="d-flex flex-row justify-content-between mx-5">
+						<div class="fs-4">
+							{% block page_header %}
+								Product list
+							{% endblock %}
+						</div>
+						{% block top_buttons %}
+							<div class="mt-1">
+								<button onclick="location.href='/add-product'" type="button">ADD</button>
+								<button id="delete-ptoduct-btn">MASS DELETE</button>
+							</div>
+						{% endblock %}
+					</div>
+					<hr class="border border-dark border-1 opacity-75 my-2">
+					<div class="data-container m-4">
+						{% block container %}
+							<form action="/" id="products_form" method="post">
+								<input type="hidden" name="_method" value="PATCH"/>
+								<div class="container text-center">
+									<div class="row row-cols-4">
+										{% for product in products %}
+											<div class="d-flex flex-column mb-3 ">
+												<div class="border border-2 border-dark mx-3">
+													<div class="input-group input-group-sm">
+														<div class="mt-2 mx-4 input-group-text p-0">
+															<input class="form-check-input mt-0 delete-checkbox" type="checkbox" value="{{ product.id }}" name="itemToDel[]" aria-label="Checkbox for following text input">
+														</div>
+													</div>
+													<div class="">{{ product.sku }}</div>
+													<div class="">{{ product.name }}</div>
+													<div class="">{{ product.price }}</div>
+													{% for property, value in product.data %}
+														<div class="mb-2">{{ property|capitalize }}:
+															{{ value }}</div>
+													{% endfor %}
+												</div>
+											</div>
+										{% endfor %}
+									</div>
+								</div>
+							</form>
+							<script src="/js/mass-delete.js"></script>
+						{% endblock %}
+					</div>
+					<hr class="border border-dark border-1 opacity-75 my-2">
+					<div class="context-footer text-center mt-2">
+						Scandiweb Test assignment
+						<div class="bg-secondary mt-2" style="height:20px"></div>
+					</div>
+				</div>
+				<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+			</body>
+		{% endblock %}
+</html>
