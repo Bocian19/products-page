@@ -4,8 +4,6 @@ namespace App\Entity\Product;
 
 use Doctrine\ORM\Mapping\Entity as ORM;
 
-require_once dirname(__DIR__, 3) . '/vendor/autoload.php';
-
 /** 
  * @ORM/Entity 
  * */

@@ -10,7 +10,6 @@ use Doctrine\ORM\Mapping\DiscriminatorColumn;
 use Doctrine\ORM\Mapping\DiscriminatorMap;
 use Doctrine\ORM\Mapping\GeneratedValue;
 
-require_once dirname(__DIR__, 3).'/vendor/autoload.php';
 
 /**
  * @Entity
